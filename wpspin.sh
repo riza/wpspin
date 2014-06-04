@@ -23,7 +23,7 @@ echo "0===============================0";
 
 echo "0========   RESULT  ============0";
 printf "Your WPS Pin : ";
-echo "ibase=16; 5E1D84" | bc;
+echo "ibase=16; $MAC" | bc;
 printf "\n\n";
 
 	
