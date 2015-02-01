@@ -42,11 +42,20 @@ else
 
 	done
 
+	wpspin=$(echo "$pin$chksum");
 
+	check=${#wpspin};
+
+	if [ $check -gt 8 ];
+		then
+
+		wpspin=$(echo "$pin");
+
+	fi
 
 	echo "0========   RESULT  ============0";
 	printf "Your WPS Pin : ";
-	echo "$pin$chksum";
+	echo "$wpspin";
 	printf "\n\n";
 
 	
