@@ -1,11 +1,10 @@
 #!/bin/bash
 clear;
 echo "0===============================0";
-echo "0 WPSPin.sh (2014) Rıza SABUNCU 0";
+echo "0 WPSPin.sh (2015) Rıza SABUNCU 0";
 echo "0 github.com/rizasabuncu        0";
 echo "0===============================0";
 printf "\n\n";
-# Var
 
 MAC=$1
 
@@ -13,18 +12,42 @@ if [ -z $MAC ];
 
 	then
 
-echo "0========   USAGE   ============0";
-echo "0 ./wpspin.sh 12456             0";
-echo "0===============================0";
+	echo "0========   USAGE   ============0";
+	echo "0 ./wpspin.sh 12456             0";
+	echo "0===============================0";
 
 
 	
-	else
+else
 
-echo "0========   RESULT  ============0";
-printf "Your WPS Pin : ";
-echo "ibase=16; $MAC" | bc;
-printf "\n\n";
+	chksumx=$(echo "ibase=16; $MAC" | bc);
+	chksum=$(echo "ibase=16; $MAC" | bc);
+
+	i=0;
+
+	for (( ; ; ))
+	do
+		if [ $chksum -eq 0 ]; then
+
+
+			chksum=$(echo "(10-$i%10)%10" | bc);
+			break;
+
+		fi
+
+		j=$(echo "$i+3*($chksum%10)" | bc);
+		k=$(echo "$chksum/10" | bc);
+		i=$(echo "$j+$k%10" | bc);
+		chksum=$(echo "$k/10" | bc);
+
+	done
+
+
+
+	echo "0========   RESULT  ============0";
+	printf "Your WPS Pin : ";
+	echo "$chksumx$chksum";
+	printf "\n\n";
 
 	
 fi
