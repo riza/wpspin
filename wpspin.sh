@@ -20,7 +20,7 @@ if [ -z $MAC ];
 	
 else
 
-	chksumx=$(echo "ibase=16; $MAC" | bc);
+	pin=$(echo "ibase=16; $MAC" | bc);
 	chksum=$(echo "ibase=16; $MAC" | bc);
 
 	i=0;
@@ -46,7 +46,7 @@ else
 
 	echo "0========   RESULT  ============0";
 	printf "Your WPS Pin : ";
-	echo "$chksumx$chksum";
+	echo "$pin$chksum";
 	printf "\n\n";
 
 	
